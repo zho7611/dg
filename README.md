@@ -39,15 +39,15 @@ How to build
 Clone a copy of the main dg git repo by running:
 
 ```dos
-git clone git://github.com/zho7611/dg.git
+git clone git://github.com/zho7611/dg
 ```
 
-Open dev/src/all.sln via Visual Studio 2008
+Open **dev/src/all.sln** via Visual Studio 2008
 
-Run from menu : Build > Rebuild Solution
+Run from menu : **Build > Rebuild Solution**
 
 How to run viewer
 -----------------
 
-Run bin\viewer.exe
+Run **bin\viewer.exe**
 

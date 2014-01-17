@@ -9,6 +9,8 @@ Screenshots
 ![Huriza Screenshot](http://zho.pe.kr/blog/shot/huriza_s.png)
 ![Viewer Screenshot](http://zho.pe.kr/blog/shot/viewer_s.png)
 
+The models are not included in the git repository.
+
 Features
 --------
 

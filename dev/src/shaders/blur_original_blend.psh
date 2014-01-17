@@ -1,0 +1,22 @@
+// Copyright (c) 2014 Jiho Choi. All rights reserved.
+// To use this source, see LICENSE file.
+
+#include "Common.hlsl"
+#include "Blur.hlsl"
+
+PixelShaderOutput Main(PixelShaderInputForBlur input) {
+  PixelShaderOutput output;
+  float3 source = tex2D(SourceTextureSampler, input.tex_coord.xy);
+  float3 target = tex2D(TargetTextureSampler, input.tex_coord.xy);
+  float3 blended = source + GlobalBloomWeight.x * (1.0 - source) * target;
+
+#if WITH_DEPTHOFFIELD
+  float depth = clamp(tex2D(DepthTextureSampler, input.tex_coord.xy).r, 0, 1);
+  output.color.rgb = lerp(source, target, depth);
+#else
+  output.color.rgb = blended;
+#endif
+
+  output.color.a = 1.0f;
+  return output;
+}

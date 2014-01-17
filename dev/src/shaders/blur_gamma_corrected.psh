@@ -1,0 +1,14 @@
+// Copyright (c) 2014 Jiho Choi. All rights reserved.
+// To use this source, see LICENSE file.
+
+#include "Common.hlsl"
+#include "Blur.hlsl"
+
+PixelShaderOutput Main(PixelShaderInputForBlur input) {
+  PixelShaderOutput output;
+  float3 source = tex2D(SourceTextureSampler, input.tex_coord.xy);
+  float inverse_gamma = 1.0f / GlobalGammaCorrection.x;
+  output.color.rgb = pow(clamp(source, 0, 1), inverse_gamma);
+  output.color.a = 1.0f;
+  return output;
+}

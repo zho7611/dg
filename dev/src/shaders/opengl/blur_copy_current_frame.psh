@@ -1,0 +1,10 @@
+// Blur_copy_current_frame.psh
+
+uniform sampler2D SourceTextureSampler;
+
+varying vec2 v_uv;
+
+void main() {
+  gl_FragColor.xyz = texture2D(SourceTextureSampler, v_uv).xyz;
+  gl_FragColor.w = 1.0;
+}

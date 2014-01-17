@@ -1,0 +1,10 @@
+*.mod
+*.raw
+*.msh
+*.mat
+*.dds
+*.pak
+*.png
+*.mesh
+*.model
+*.bin

@@ -1,0 +1,12 @@
+// Sprite_font.psh
+
+uniform sampler2D SpriteTextureSampler;
+
+varying vec4 v_color;
+varying vec4 v_tex_coord;
+
+void main() {
+  gl_FragData[0] = v_color;
+  // In hlsl, the alpha is in .w
+  gl_FragData[0].w = texture2D(SpriteTextureSampler, v_tex_coord.xy).x;
+}

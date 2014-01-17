@@ -1,0 +1,1 @@
+fxc %1 /Tvs_1_0 /EMain

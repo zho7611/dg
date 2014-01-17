@@ -1,0 +1,21 @@
+// Copyright (c) 2014 Jiho Choi. All rights reserved.
+// To use this source, see LICENSE file.
+
+#include "Common.hlsl"
+#include "Lighting.hlsl"
+
+PixelShaderOutput Main(PixelShaderInput input) {
+  PixelShaderOutput output;
+  float3 normal = GetNormal(input);
+  // For the naive shadow
+  // Float shadow_term = CalcShadow(input);
+  float shadow_term = CalcShadowCsm(input);
+  // For the shadow visualization
+  // Float3 shadow_term = CalcShadowColorCsm(input);
+  float3 ambient = GetAmbient(input);
+  float3 diffuse = GetDiffuse(input, normal);
+  float3 albedo = GetAlbedo(input);
+  output.color.rgb = GetAmbientOcclusion(input) * (ambient + shadow_term * diffuse * GlobalLightBrightness.x) * albedo;
+  output.color.a = 1.0f;
+  return output;
+}

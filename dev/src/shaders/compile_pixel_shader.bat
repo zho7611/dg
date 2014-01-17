@@ -1,0 +1,1 @@
+fxc %1 /Tps_3_0 /EMain

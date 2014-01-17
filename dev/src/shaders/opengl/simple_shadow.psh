@@ -1,0 +1,9 @@
+// Simple_shadow.psh
+
+varying vec4 v_tex_coord;
+varying vec4 v_depth;
+  
+void main() {
+  gl_FragData[0].xyz  = vec3((v_depth.x/v_depth.y));
+  gl_FragData[0].w  = 1.0;
+}

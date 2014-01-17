@@ -1,0 +1,15 @@
+// Blur_original_blend.psh
+
+uniform vec4 GlobalBloomWeight;
+uniform sampler2D SourceTextureSampler;
+uniform sampler2D TargetTextureSampler;
+
+varying vec2 v_uv;
+
+void main() {
+  vec3 source = texture2D(SourceTextureSampler, v_uv).xyz;
+  vec3 target = texture2D(TargetTextureSampler, v_uv).xyz;
+  vec3 blended = source + (GlobalBloomWeight.x * (1.0 - source)) * target;
+  gl_FragColor.xyz = blended;
+  gl_FragColor.w = 1.0;
+}

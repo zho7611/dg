@@ -1,0 +1,9 @@
+// Imgui.psh
+varying vec2 texCoord;
+varying vec4 vertexColor;
+uniform sampler2D GlobalImguiTexture;
+
+void main(void) {
+  float alpha = texture2D(GlobalImguiTexture, texCoord).r;
+  gl_FragData[0] = vec4(vertexColor.rgb, vertexColor.a * alpha);
+};

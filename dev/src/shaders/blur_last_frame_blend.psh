@@ -1,0 +1,20 @@
+// Copyright (c) 2014 Jiho Choi. All rights reserved.
+// To use this source, see LICENSE file.
+
+#include "Common.hlsl"
+#include "Blur.hlsl"
+
+PixelShaderOutput Main(PixelShaderInputForBlur input) {
+  PixelShaderOutput output;
+  float3 current = tex2D(SourceTextureSampler, input.tex_coord.xy).rgb;
+  float3 last = tex2D(TargetTextureSampler, input.tex_coord.xy).rgb;
+  const float speed = 16.0;
+  float weight = clamp(BlurTimeDeltaInSec.x*speed, 0, 1);
+  float3 diff3 = current - last;
+  float diffness = sqrt(dot(diff3, diff3));
+  float sim_weight = clamp(1.0/256.0/diffness, 0.0, 1.0);
+  output.color.rgb = lerp(last, current, max(weight, sim_weight));
+  output.color.a = 1.0;
+  return output;
+}
+

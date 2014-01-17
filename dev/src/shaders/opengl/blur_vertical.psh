@@ -1,0 +1,18 @@
+// Blur_vertical.psh
+
+uniform vec4 BlurMapOffsets[15];
+uniform vec4 BlurMapWeights[15];
+uniform sampler2D SourceTextureSampler;
+varying vec2 v_uv;
+
+void main() {
+  vec3 color = vec3(0.0);
+  vec2 uv;
+  for (int idx = 0; idx < 15; ++idx) {
+    uv = v_uv.xy + vec2(0.0, BlurMapOffsets[idx].y);
+    color += BlurMapWeights[idx].x*texture2D(SourceTextureSampler, uv).xyz;
+  }
+  gl_FragColor.xyz = color;
+  gl_FragColor.w = 1.0;
+}
+

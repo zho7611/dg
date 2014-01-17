@@ -1,0 +1,12 @@
+cd result
+del *.tga
+del *.jpg
+del *.png
+del *.dds
+del *.raw
+del *.bin
+del *.pak
+del *.mesh
+del *.mod
+del *.mat
+del *.anim

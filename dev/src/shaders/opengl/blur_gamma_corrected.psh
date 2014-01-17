@@ -1,0 +1,17 @@
+// Blur_gamma_corrected.psh
+
+uniform vec4 GlobalGammaCorrection;
+uniform sampler2D SourceTextureSampler;
+
+varying vec2 v_uv;
+
+void main() {
+  vec3 source;
+  float inv_gamma;
+  source = texture2D(SourceTextureSampler, v_uv).xyz;
+  // For now, srgb/gamma is not supported in OpenGL
+  inv_gamma = 1.0 / GlobalGammaCorrection.x;
+  //inv_gamma = 1.0;
+  gl_FragColor.xyz = pow(clamp(source, vec3(0.0), vec3(1.0)), vec3(inv_gamma));
+  gl_FragColor.w = 1.0;
+}

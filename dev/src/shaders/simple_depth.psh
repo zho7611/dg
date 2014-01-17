@@ -1,0 +1,18 @@
+// Copyright (c) 2014 Jiho Choi. All rights reserved.
+// To use this source, see LICENSE file.
+
+#include "Common.hlsl"
+#include "Lighting.hlsl"
+
+PixelShaderOutput Main(PixelShaderInputForDepth input) {
+  PixelShaderOutput output;
+#if WITH_DEPTHOFFIELD
+  float depth = 1 - input.depth.x / input.depth.y;
+  depth = (depth- .1f) * 10;
+#else
+  float depth = input.depth.x / input.depth.y;
+#endif
+  output.color.rgb = depth;
+  output.color.a = 0.f;
+  return output;
+}

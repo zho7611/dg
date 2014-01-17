@@ -1,0 +1,15 @@
+// Copyright (c) 2014 Jiho Choi. All rights reserved.
+// To use this source, see LICENSE file.
+
+#include "Common.hlsl"
+#include "Lighting.hlsl"
+
+PixelShaderOutput Main(PixelShaderInput input) {
+  PixelShaderOutput output;
+  float3 normal = GetNormal(input);
+  float3 specular = GetSpecular(input, normal);
+  // #todo The shadow term should be cared of
+  output.color.rgb = GlobalLightBrightness.r * specular;
+  output.color.a = 1.0f;
+  return output;
+}

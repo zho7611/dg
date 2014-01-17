@@ -1,0 +1,68 @@
+// Simple_specular.psh
+
+struct VertexShaderInput {
+  vec4 position;
+  vec4 normal;
+  vec4 tex_coord;
+  vec4 tangent;
+};
+
+struct PixelShaderInput {
+  vec4 position;
+  vec4 tex_coord;
+  vec4 eye_dir;
+  vec4 light_dir;
+  vec4 shadow_position;
+  vec4 half_dir;
+  vec4 interpolated_position;
+};
+
+struct PixelShaderOutput {
+  vec4 color;
+};
+
+uniform vec4 GlobalLightBrightness;
+uniform sampler2D NormalTextureSampler;
+uniform sampler2D SpecularTextureSampler;
+uniform vec4 GlobalMaterialSpecular; // Rgb: intensity, a : power
+
+vec3 GetSpecular( in PixelShaderInput input, in vec3 normal ) {
+  vec3 specular_factor = vec3(texture2D( SpecularTextureSampler, vec2( input.tex_coord)));
+  return specular_factor * GlobalMaterialSpecular.rgb * pow(clamp(dot(normal, input.half_dir), 0.0, 1.0), GlobalMaterialSpecular.a);
+}
+
+vec3 GetNormal( in PixelShaderInput input ) {
+  return normalize((2.0 * (texture2D( NormalTextureSampler, vec2( input.tex_coord)).xyz  - 0.5)));
+}
+
+PixelShaderOutput Main( in PixelShaderInput input ) {
+  vec3 normal;
+  vec3 specular;
+  PixelShaderOutput xlat_var_output;
+  normal = GetNormal(input);
+  specular = GetSpecular(input, normal);
+  xlat_var_output.color.xyz  = (GlobalLightBrightness.x * specular);
+  xlat_var_output.color.w  = 1.00000;
+  return xlat_var_output;
+}
+
+varying vec4 v_tex_coord;
+varying vec4 v_eye_dir;
+varying vec4 v_light_dir;
+varying vec4 v_shadow_position;
+varying vec4 v_half_dir;
+varying vec4 v_interpolated_position;
+
+void main() {
+  PixelShaderOutput var_out;
+  PixelShaderInput var_in;
+  var_in.position = vec4(0.0);
+  var_in.tex_coord = v_tex_coord;
+  var_in.eye_dir = v_eye_dir;
+  var_in.light_dir = v_light_dir;
+  var_in.shadow_position = v_shadow_position;
+  var_in.half_dir = v_half_dir;
+  var_in.interpolated_position = v_interpolated_position;
+  var_out = Main(var_in);
+  gl_FragData[0] = vec4(var_out.color);
+}

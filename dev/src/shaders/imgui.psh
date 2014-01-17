@@ -1,0 +1,22 @@
+// Copyright (c) 2014 Jiho Choi. All rights reserved.
+// To use this source, see LICENSE file.
+
+struct PixelShaderInput {
+  float4 position : POSITION; // Vertex position
+  float2 texCoord : TEXCOORD0;
+  float4 vertexColor : TEXCOORD1;
+};
+
+struct PixelShaderOutput {
+  float4 color : COLOR0; // Pixel Color
+};
+
+sampler GlobalImguiTexture : register(s0);
+
+PixelShaderOutput Main(PixelShaderInput input) {
+  PixelShaderOutput output;
+  float2 uv = input.texCoord;
+  float alpha = tex2D(GlobalImguiTexture, uv).a;  
+  output.color = float4(input.vertexColor.rgb, input.vertexColor.a * alpha);
+  return output;
+}

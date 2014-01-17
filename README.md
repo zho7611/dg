@@ -1,12 +1,13 @@
 DalgiEngine - Sweet 3D Game Engine
 ==================================
 
-DalgiEngine is a 3D game engine designed for compact and powerful game development. 
+DalgiEngine is a 3D game engine designed for compact and powerful game development.
 
 Screenshots
 -----------
 ![Cammy Screenshot](http://zho.pe.kr/blog/shot/cammy_s.png)
 ![Huriza Screenshot](http://zho.pe.kr/blog/shot/huriza_s.png)
+![Viewer Screenshot](http://zho.pe.kr/blog/shot/viewer_s.png)
 
 Features
 --------
@@ -16,16 +17,16 @@ Features
 - Rendering
    - Support DX9 and OpenGL 2.0+
    - Cross-platform shader effect (JSON format)
-   - Shadow mapping with CSM/soft/self shadow
-   - Post-processing effect (bloom/gamma correction)
+   - Shadow mapping with CSM/soft/self-shadow
+   - Post-processing effect (bloom/gamma-correction)
 - Basic UI system
 - Character skinning and animation
 - Core library
    - Serialization and package file support
    - UID, console window, critical section, timer, thread, memory pool, profiling, smart pointer and so on
 - Tools
-   - Test framework for unit testing
-   - COLLADA asset importer
+   - Test framework for unit-test
+   - COLLADA scene importer with skinning/animation
    - Viewer
 
 License
@@ -60,10 +61,8 @@ External libraries
 ------------------
 Other external libraries are located in dev/src/externals folder
 
-glLoadGen - https://bitbucket.org/alfonse/glloadgen
-
-stb_image - http://nothings.org/stb_image.c
-
-stb_image_write - http://nothings.org/stb/stb_image_write.h
-
-stb_truetype - http://nothings.org/stb/stb_truetype.h
+- [glLoadGen]( https://bitbucket.org/alfonse/glloadgen )
+- [stb_image]( http://nothings.org/stb_image.c )
+- [stb_image_write]( http://nothings.org/stb/stb_image_write.h )
+- [stb_truetype]( http://nothings.org/stb/stb_truetype.h )
+- [imgui]( https://github.com/AdrienHerubel/imgui )

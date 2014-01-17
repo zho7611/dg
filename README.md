@@ -3,6 +3,11 @@ DalgiEngine - Sweet 3D Game Engine
 
 DalgiEngine is a 3D game engine designed for compact and powerful game development. 
 
+Screenshots
+-----------
+![Cammy Screenshot](http://zho.pe.kr/blog/shot/cammy.png)
+![Huriza Screenshot](http://zho.pe.kr/blog/shot/huriza_s.png)
+
 Features
 --------
 

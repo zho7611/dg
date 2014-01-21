@@ -52,6 +52,10 @@ git clone git://github.com/zho7611/dg
 
 Open **dev/src/all.sln** via Visual Studio 2008
 
+Set the *viewer* project as "Startup Project"
+
+Change solution configuration to "Debug" or "Release" for DX9 renderer
+
 Run from menu : **Build > Rebuild Solution**
 
 How to run the Viewer

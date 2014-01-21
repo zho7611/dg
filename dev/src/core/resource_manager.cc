@@ -55,6 +55,11 @@ Resource* LoadResourceByClassName(const Cstr* class_name, const Cstr* path, Load
         DG_LOG_LINE(TXT("resourcemanager.loadresourcebyclassname: read-resource:%s"), path);
       }
       resource->ReadFrom(chunk.ptr());
+    } else {
+      // Resource not found.
+      // For newly created resource, its refcount is 0 for now. Just delete.
+      delete resource;
+      return NULL;
     }
   }
   g_resource_manager->OpenResource(resource);

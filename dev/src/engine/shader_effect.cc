@@ -292,7 +292,7 @@ bool ShaderEffect::FindShaderParametersByName(const Cstr* name, ParameterList* o
 
 // Set effect level shader parameters over vertex/pixel shader constant
 void ShaderEffect::CommitChanges() {
-  if ((active_technique_index_ >= 0) && (active_pass_index_ >= 0)) {
+  if ((active_technique_index_ >= 0) && (active_pass_index_ >= 0) && (techniques_.Count() > 0)) {
     ShaderPass& pass = techniques_.Get(active_technique_index_).passes_.Get(active_pass_index_);
     pass.shader_program_.SubmitParameters();
   }

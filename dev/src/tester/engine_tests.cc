@@ -899,6 +899,7 @@ TEST(SceneWithFontRender) {
   EXPECT_TRUE(TestRenderTarget(TXT("astrowithfont")));
 }
 
+#if (0) // Resource not present for now. Replace with the public asset that has skinning/animation.
 TEST(AnimationRender) {
   TEST_DEPENDS_ON(PrepareRender);
   Ptr<Model> model = LoadResource<Model>(TXT("res/fireman.pak#projecter.mod"));
@@ -934,6 +935,7 @@ TEST(AnimationRender) {
   TestPresent();
   EXPECT_TRUE(TestRenderTarget(TXT("animation")));
 }
+#endif
 
 TEST(DeviceReset) {
   g_app->ResizeWindowSize(Size2(640, 480));

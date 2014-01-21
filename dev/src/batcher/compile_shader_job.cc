@@ -25,11 +25,13 @@ static bool BuildShader(Package& package, ShaderProfile profile, Cstr* source_fi
   Ptr<T> shader = LoadResource<T>(resource_path.Get(), LoadResourceOption_Write);
   // Compile the shader with the source code
   FilePath file_path(source_file_name);
-  DG_LOG_LINE(TXT("compileshaderjob.buildshader: sourcefilename:%s shadername:%s"), source_file_name, shader_name);
+  g_console.PrintFormat(TXT("buildshader: %s %s "), source_file_name, shader_name);
   const Cstr* kIncludeDir = file_path.GetDir();
   if (!ShaderCompiler::CompileShader(profile, kIncludeDir, &source_code, shader.ptr())) {
+    g_console.Print(TXT("failed\n"));
     return false;
   }
+  g_console.Print(TXT("succeeded\n"));
   shader->shader_name_.Set(shader_name);
   // Create the shader file package for writing
   Chunk* write_chunk = package.OpenChunk(shader_name, Package::kWrite);

@@ -55,7 +55,7 @@ void ViewerView::Render(ScopedTechnique* technique) {
 }
 
 ViewerApp::ViewerApp() :
-  Application() {
+    Application() {
 }
 
 bool ViewerApp::Init(const Cstr* config_file) {
@@ -103,7 +103,6 @@ bool ViewerApp::Init(const Cstr* config_file) {
       &Vector3(0, 0, 0), &Vector3(5.f, 5.f, 0.00001f),
       &Vector4(1.f, 1.f, 1.f, 1.f),
       &Vector4(.2f, .2f, .2f, 1.f));
-  actor_ = NULL;
   actor_ = LoadActor1();
   if (ground_) viewer_view->scene()->AddModel(ground_.ptr());
   if (actor_ && actor_->model) viewer_view->scene()->AddModel(actor_->model.ptr());
@@ -114,7 +113,7 @@ void ViewerApp::Clear() {
   shadow_camera_controller_ = NULL;
   animation_ = NULL;
   animation_controller_ = NULL;
-  DG_SAFE_DELETE(actor_);
+  actor_ = NULL;
   ground_ = NULL;
   light_camera_ = NULL;
   camera_ = NULL;
@@ -122,10 +121,11 @@ void ViewerApp::Clear() {
 }
 
 ViewerActor* ViewerApp::LoadActor1() {
-  DG_SAFE_DELETE(actor_);
   actor_ = new ViewerActor;
   actor_->model = LoadResource<Model>(TXT("res/zhom.pak#body.mod"));
-  Check(actor_->model);
+  if (actor_->model == NULL) {
+    return NULL;
+  }
   actor_->yaw_pitch_roll = Vector3::kZero;
   // Load animations
   if (0) {
@@ -138,33 +138,35 @@ ViewerActor* ViewerApp::LoadActor1() {
     animation_controller_->Update(0);
   }
   actor_->model->UpdateTransform();
-  return actor_;
+  return actor_.ptr();
 }
 
 ViewerActor* ViewerApp::LoadActor2() {
-  DG_SAFE_DELETE(actor_);
   actor_ = new ViewerActor;
   actor_->model = LoadResource<Model>(TXT("dev/res/test/result/box.mod"));
-  Check(actor_->model);
+  if (actor_->model == NULL) {
+    return NULL;
+  }
   actor_->yaw_pitch_roll = Vector3::kZero;
   actor_->model->local_transform_.position_.z = 0.5f;
   actor_->model->local_transform_.scale_ = 0.5f;
   actor_->model->UpdateTransform();
   animation_controller_ = NULL;
-  return actor_;
+  return actor_.ptr();
 }
 
 ViewerActor* ViewerApp::LoadActor3() {
-  DG_SAFE_DELETE(actor_);
   actor_ = new ViewerActor;
   actor_->model = LoadResource<Model>(TXT("dev/res/test/result/sphere.mod"));
-  Check(actor_->model);
+  if (actor_->model == NULL) {
+    return NULL;
+  }
   actor_->yaw_pitch_roll = Vector3::kZero;
   actor_->model->local_transform_.position_.z = 0.5f;
   actor_->model->local_transform_.scale_ = 0.25f;
   actor_->model->UpdateTransform();
   animation_controller_ = NULL;
-  return actor_;
+  return actor_.ptr();
 }
 
 void ViewerApp::OnMouseUpdate(int x, int y, MouseButtonState button_state) {
@@ -274,7 +276,7 @@ void ViewerView::DrawIMGUITest() {
     imguiSeparatorLine();
     imguiLabel("Select Model");
     toggle = imguiCheck("Actor1", selected_model == 0);
-    ViewerActor* actor = app_->actor_;
+    ViewerActor* actor = app_->actor_.ptr();
     if (toggle) {
       if (selected_model != 0) {
         selected_model = 0;

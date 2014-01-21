@@ -11,6 +11,9 @@ static Chunk* CreatePackageChunk(const Cstr* path, enum Package::OpenChunkOption
   if (!package) {
     package = LoadResource<Package>(resource_path.GetFilePath());
   }
+  if (!package) {
+    return NULL;
+  }
   return package->OpenChunk(resource_path.GetChunkName(), option);
 }
 

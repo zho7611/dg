@@ -383,6 +383,10 @@ bool imguiRenderGLInit() {
     }
   }
   g_shader = LoadResource<ImguiShaderEffect>(g_engine_config->imgui_effect_path_.Get());
+  if (!g_shader) {
+    // Imgui shader not found
+    return false;
+  }
   g_shader->AddRef();
 
   g_shader->SetTextureByName(TXT("GlobalImguiTexture"), g_font_tex);

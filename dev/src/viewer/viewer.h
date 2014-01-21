@@ -27,7 +27,7 @@ public:
   virtual void DrawPostRender();
 };
 
-struct ViewerActor {
+struct ViewerActor : public RefCount {
 public:
   Ptr<Model> model;
   Vector3 yaw_pitch_roll;
@@ -51,7 +51,7 @@ public:
   ViewerActor* LoadActor2();
   ViewerActor* LoadActor3();
 
-  ViewerActor* actor_;
+  Ptr<ViewerActor> actor_;
   Ptr<Model> ground_;
   Ptr<ModelAnimationController> animation_controller_;
   Ptr<Camera> light_camera_;

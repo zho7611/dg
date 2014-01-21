@@ -25,8 +25,6 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "../../externals/imgui/imgui.h"
-
 using namespace dg;
 
 // Some math headers don't have PI defined.

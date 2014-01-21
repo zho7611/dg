@@ -59,6 +59,11 @@
 #include "vertex_decl.cc"
 #include "engine_main.cc"
 
+#if defined(DG_USE_IMGUI)
+#include "../externals/imgui/imgui.cc"
+#include "../externals/imgui/imgui_render.cc"
+#endif
+
 #if defined(DG_FONT_FREETYPE)
 #include "font_face_freetype.cc"
 #include "font_manager_freetype.cc"

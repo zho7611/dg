@@ -79,3 +79,9 @@
 #include "shader_compiler.h"
 #include "follow_camera.h"
 #include "shadows_manager.h"
+
+#define DG_USE_IMGUI
+#if defined(DG_USE_IMGUI)
+#include "../externals/imgui/imgui.h"
+#include "../externals/imgui/imgui_render.h"
+#endif

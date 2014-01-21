@@ -25,7 +25,6 @@
 #include <string.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include "../../externals/imgui/imgui.h"
 
 #ifdef _MSC_VER
 #       define snprintf _snprintf

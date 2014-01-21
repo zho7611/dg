@@ -6,9 +6,6 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "../externals/stb_image_write/stb_image_write.h"
 
-#include "../externals/imgui/imgui.h"
-#include "../externals/imgui/imgui_render.h"
-
 using namespace dg;
 
 bool TestRenderTarget(const Cstr* testname) {

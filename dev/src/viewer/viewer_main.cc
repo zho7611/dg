@@ -4,8 +4,6 @@
 #include "../gui/gui_first.h"
 #include "resource.h"
 #include "viewer.h"
-#include "../externals/imgui/imgui_render.h"
-#include "../externals/imgui/imgui.h"
 
 using namespace dg;
 

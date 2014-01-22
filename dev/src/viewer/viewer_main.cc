@@ -122,14 +122,15 @@ void ViewerApp::Clear() {
 
 ViewerActor* ViewerApp::LoadActor1() {
   actor_ = new ViewerActor;
-  actor_->model = LoadResource<Model>(TXT("res/zhom.pak#body.mod"));
+  actor_->model = LoadResource<Model>(g_engine_config->default_model_.Get());
   if (actor_->model == NULL) {
     return NULL;
   }
+  actor_->model->local_transform_.scale_ = g_engine_config->model_scale_;
   actor_->yaw_pitch_roll = Vector3::kZero;
   // Load animations
-  if (0) {
-    Ptr<Animation> animation = LoadResource<Animation>(TXT("res/zhom.pak#animation.anim"));
+  Ptr<Animation> animation = LoadResource<Animation>(TXT("res/fireman.pak#animation.anim"));
+  if (animation) {
     actor_->model->BindAnimation(animation.ptr());
     animation_controller_ = new ModelAnimationController;
     animation_controller_->animation_ = animation;
@@ -408,9 +409,9 @@ void ViewerView::DrawIMGUITest() {
           p = part->material_->GetParameterByName(TXT("GlobalMaterialSpecular"));
           if (p) {
             Vector4 specular = p->GetVector4();
-            imguiSlider("Specular Intensity R", &specular.x, 0.0, 2.0f, 0.01f);
-            imguiSlider("Specular Intensity G", &specular.y, 0.0, 2.0f, 0.01f);
-            imguiSlider("Specular Intensity B", &specular.z, 0.0, 2.0f, 0.01f);
+            imguiSlider("Specular Intensity R", &specular.x, 0.0, 20.0f, 0.01f);
+            imguiSlider("Specular Intensity G", &specular.y, 0.0, 20.0f, 0.01f);
+            imguiSlider("Specular Intensity B", &specular.z, 0.0, 20.0f, 0.01f);
             imguiSlider("Specular Power", &specular.w, 0.0, 100.0f, 0.01f);
             p->SetVector4(&specular);
           }

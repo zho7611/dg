@@ -92,7 +92,7 @@ void collada_importer::Material::ConvertMaterial() {
   material_util::SetMaterialDiffuse(engine_material_.ptr(), 1.0f, 1.0f, 1.0f);
   material_util::SetMaterialAmbient(engine_material_.ptr(), .3f, .3f, .3f);
   // Rgb: intensity, a: power
-  material_util::SetMaterialSpecular(engine_material_.ptr(), 1.0f, 1.0f, 1.0f, 32.0f);
+  material_util::SetMaterialSpecular(engine_material_.ptr(), 2.0f, 2.0f, 2.0f, 8.0f);
   // Set ambient occlusion texture
   AddTextureParam(
       *engine_material_, effect.ptr(),

@@ -20,7 +20,7 @@
 #define DG_LOG_RENDER_CALL(...) 
 
 // Comment out the following line to disable OpenGL error check
-//#define DG_IGNORE_GL_ERROR
+#define DG_IGNORE_GL_ERROR
 
 #if defined(DG_IGNORE_GL_ERROR)
 // OpenGL error check for the current expression

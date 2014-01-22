@@ -1,2 +1,5 @@
 Debug-*.*
 /*.exe
+/D3DCompiler_43.dll
+/D3DX9_43.dll
+/nvToolsExt32_1.dll

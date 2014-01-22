@@ -6,3 +6,8 @@
 /bin/debug*.exe
 /bin/release*.exe
 /res/engine.bin
+/dev/src/shaders/opengl_es2
+/dev/src/documents
+/dev/src/fbx_importer
+/dev/src/sand_box
+/dev/res/zhom/*.max

@@ -14,16 +14,16 @@
   </asset>
   <library_images>
     <image id="occlusion.tga" name="occlusion_tga">
-      <init_from>./zhom/occlusion.tga</init_from>
+      <init_from>./occlusion.tga</init_from>
     </image>
     <image id="diffuse.tga" name="diffuse_tga">
-      <init_from>./zhom/diffuse.tga</init_from>
+      <init_from>./diffuse.tga</init_from>
     </image>
     <image id="specular.tga" name="specular_tga">
-      <init_from>./zhom/specular.tga</init_from>
+      <init_from>./specular.tga</init_from>
     </image>
     <image id="normal.tga" name="normal_tga">
-      <init_from>./zhom/normal.tga</init_from>
+      <init_from>./normal.tga</init_from>
     </image>
   </library_images>
   <library_materials>

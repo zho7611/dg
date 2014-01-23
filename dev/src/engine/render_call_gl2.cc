@@ -1194,16 +1194,14 @@ bool RC_LockTexture(
   texture_gl2->lock_desc.flag = lock_flag;
   texture_gl2->lock_desc.buffer = out_buffer = new uint8_t[kSizeBytes];
   if (lock_flag == GpuLockType_ReadOnly) {
-    uint8_t* bgra = new uint8_t[texture_gl2->pitch*texture_gl2->height];
     glBindTexture(texture_gl2->target, texture.Get());
     glGetTexImage(texture_gl2->target,
       0, // level
       GL_RGBA,
       GL_UNSIGNED_BYTE,
-      bgra);
-    texture_gl2->lock_desc.buffer = out_buffer = bgra;
+      out_buffer);
     if (texture_gl2->width*4 == texture_gl2->pitch) {
-      MyMemCpy(out_buffer, bgra, texture_gl2->pitch*texture_gl2->height);
+      MyMemCpy(out_buffer, out_buffer, kSizeBytes);
     } else {
       DG_UNIMPLEMENTED();
     }

@@ -1,4 +1,4 @@
-@echo off
+rem @echo off
 
 rem ----------------------------------------
 rem batcher commands
@@ -63,49 +63,49 @@ if not errorlevel == 0 goto label_error
 
 :astro
 set res_name=astro
-if not exist %res_path%%res_name%\%res_name%.dae goto astro
+if not exist %res_path%%res_name%\%res_name%.dae goto fireman
 echo [batcher] build %res_name% resource...
 %importer_path% dev\res\%res_name%\%res_name%.dae res\%res_name%.pak -hidewindow
 if not errorlevel == 0 goto label_error
 
 :fireman
 set res_name=fireman
-if not exist %res_path%%res_name%\%res_name%.dae goto astro
+if not exist %res_path%%res_name%\%res_name%.dae goto huriza
 echo [batcher] build %res_name% resource...
 %importer_path% dev\res\%res_name%\%res_name%.dae res\%res_name%.pak -hidewindow
 if not errorlevel == 0 goto label_error
 
 :huriza
 set res_name=huriza
-if not exist %res_path%%res_name%\%res_name%.dae goto astro
+if not exist %res_path%%res_name%\%res_name%.dae goto cammy
 echo [batcher] build %res_name% resource...
 %importer_path% dev\res\%res_name%\%res_name%.dae res\%res_name%.pak -hidewindow
 if not errorlevel == 0 goto label_error
 
 :cammy
 set res_name=cammy
-if not exist %res_path%%res_name%\%res_name%.dae goto astro
+if not exist %res_path%%res_name%\%res_name%.dae goto zhom
 echo [batcher] build %res_name% resource...
 %importer_path% dev\res\%res_name%\%res_name%.dae res\%res_name%.pak -hidewindow
 if not errorlevel == 0 goto label_error
 
 :zhom
 set res_name=zhom
-if not exist %res_path%%res_name%\%res_name%.dae goto astro
+if not exist %res_path%%res_name%\%res_name%.dae goto house
 echo [batcher] build %res_name% resource...
 %importer_path% dev\res\%res_name%\%res_name%.dae res\%res_name%.pak -hidewindow
 if not errorlevel == 0 goto label_error
 
 :house
 set res_name=house
-if not exist %res_path%%res_name%\%res_name%.dae goto astro
+if not exist %res_path%%res_name%\%res_name%.dae goto street
 echo [batcher] build %res_name% resource...
 %importer_path% dev\res\%res_name%\%res_name%.dae res\%res_name%.pak -hidewindow
 if not errorlevel == 0 goto label_error
 
 :street
 set res_name=street
-if not exist %res_path%%res_name%\%res_name%.dae goto astro
+if not exist %res_path%%res_name%\%res_name%.dae goto label_end
 echo [batcher] build %res_name% resource...
 %importer_path% dev\res\%res_name%\%res_name%.dae res\%res_name%.pak -hidewindow
 if not errorlevel == 0 goto label_error

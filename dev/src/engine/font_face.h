@@ -5,6 +5,8 @@
 
 #if defined(DG_FONT_FREETYPE)
 struct FT_FaceRec_;
+#elif defined(DG_FONT_STB_TRUETYPE)
+struct stbtt_fontinfo;
 #endif
 
 namespace dg {
@@ -39,6 +41,8 @@ private:
 
 #if defined(DG_FONT_FREETYPE)
   FT_FaceRec_* face_ft2_;
+#elif defined(DG_FONT_STB_TRUETYPE)
+  stbtt_fontinfo* stb_font_info_;
 #endif
 };
 

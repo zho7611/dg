@@ -67,6 +67,9 @@
 #if defined(DG_FONT_FREETYPE)
 #include "font_face_freetype.cc"
 #include "font_manager_freetype.cc"
+#elif defined(DG_FONT_STB_TRUETYPE)
+#include "font_face_stb_truetype.cc"
+#include "font_manager_pure.cc"
 #else
 #include "font_face_pure.cc"
 #include "font_manager_pure.cc"

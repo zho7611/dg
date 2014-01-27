@@ -31,7 +31,8 @@
 // font renderer
 #if defined(DG_TARGET_WIN32)
   //#define DG_FONT_FREETYPE// Requires DG_TARGET_WIN32
-  #define DG_FONT_NULL
+  #define DG_FONT_STB_TRUETYPE
+  //#define DG_FONT_NULL
 #else
   #define DG_FONT_NULL
 #endif

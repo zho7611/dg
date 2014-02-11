@@ -888,8 +888,8 @@ TEST(SceneWithFontRender) {
     }
     // Draw text
     {
-      const Cstr message[] = TXT("This test should confirm the nomal map rendering and shading with text rendering.");
-      Point2 coord = Point2(16, 32);
+      const Cstr message[] = TXT("This test should confirm the model rendering and shading with text rendering.");
+      Point2 coord = Point2(16, 16);
       const ColorInt color = DG_MAKE_COLOR_INT(255, 255, 255, 255);
       g_engine.system_font.Draw(message, coord, color);
     }

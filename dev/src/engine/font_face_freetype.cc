@@ -9,7 +9,7 @@ namespace dg {
 
 class FaceBitmapDesc {
 public:
-  int left;
+  int left_;
   int top_;
   FT_Bitmap* bitmap_;
   int bitmap_pitch_;
@@ -21,7 +21,7 @@ public:
     int width = bitmap_->width;
     int height = bitmap_->rows;
     for (int y = 0, target_y = top_; y < height; ++y, ++target_y) {
-      for (int x = 0, target_x = left; x < width; ++x, ++target_x) {
+      for (int x = 0, target_x = left_; x < width; ++x, ++target_x) {
         if ((target_y < 0) || (target_x < 0) ||
             (target_x >= texture_width_) ||
             (target_y >= texture_height_)) {
@@ -39,7 +39,7 @@ public:
     int idx = 0;
     unsigned char bitmap_data = 0;
     for (int y = 0, target_y = top_; y < height; ++y, ++target_y) {
-      for (int x = 0, targetX = left; x < bitmap_pitch_; x++, targetX += 8) {
+      for (int x = 0, targetX = left_; x < bitmap_pitch_; x++, targetX += 8) {
         if ((target_y < 0) ||
             (targetX < 0) ||
             (targetX >= texture_width_) ||
@@ -100,19 +100,8 @@ void FontFace::RenderText(
     const Point2& position) {
   Check(face_ft2_);
   FT_GlyphSlot slot = face_ft2_->glyph;
-  UnicodeStr* wide_text = NULL;
-#ifdef _UNICODE
-  const int kNumChars = string_util::GetLength(text);
-#else
-  const int kNumChars = string_util::AnsiToUnicode(text, -1, wide_text, 0);
-#endif
-  Check(kNumChars > 0);
-  wide_text = new UnicodeStr[kNumChars+1];
-#ifdef _UNICODE
-  MyStrnCpy(wide_text, text, kNumChars+1);
-#else
-  string_util::AnsiToUnicode(text, -1, wide_text, kNumChars);
-#endif
+  String textstr(text);
+  UnicodeStr* wide_text = textstr.GetUnicodeStr();
   FT_Vector pen;
   pen.x = position.x;
   pen.y = position.y;
@@ -127,7 +116,7 @@ void FontFace::RenderText(
     bitmap_desc.texture_width_ = texture->size().x;
     bitmap_desc.texture_height_ = texture->size().y;
     bitmap_desc.bitmap_ = &slot->bitmap;
-    bitmap_desc.left = pen.x;
+    bitmap_desc.left_ = pen.x;
     bitmap_desc.top_ = 0;
     bitmap_desc.bitmap_pitch_ = 0;
     for (int idx = 0; idx < kNumChars; ++idx) {
@@ -135,12 +124,12 @@ void FontFace::RenderText(
       FT_Load_Char(face_ft2_, char_code, FT_LOAD_RENDER);
       if (slot->bitmap.pixel_mode == FT_PIXEL_MODE_MONO) {
         // In mono mode, the bitmap_left is invalid
-        bitmap_desc.left = pen.x;
+        bitmap_desc.left_ = pen.x;
         bitmap_desc.top_ = pen.y - slot->bitmap_top;
         bitmap_desc.bitmap_pitch_ = slot->bitmap.pitch;
         bitmap_desc.FillTextureAsMono(texture_buffer);
       } else {
-        bitmap_desc.left = pen.x + slot->bitmap_left;
+        bitmap_desc.left_ = pen.x + slot->bitmap_left;
         bitmap_desc.top_ = pen.y - slot->bitmap_top;
         bitmap_desc.FillTextureAsGray(texture_buffer);
       }
@@ -148,7 +137,6 @@ void FontFace::RenderText(
       pen.y += slot->advance.y >> 6;
     }
   }
-  delete [] wide_text;
 }
 
 } // namespace dg

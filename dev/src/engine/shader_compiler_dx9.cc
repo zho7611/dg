@@ -237,18 +237,8 @@ bool ShaderCompiler::CompileShader(
       &table.ref());
   // If failed, log the error message
   if (ret != D3D_OK) {
-    LPVOID cur_buff = compile_errors->GetBufferPointer();
-    String message;
-#if defined(_UNICODE)
-    int length = string_util::AnsiToUnicode((const char*)cur_buff, -1, 0, 0);
-    UnicodeStr* uni_str = new UnicodeStr[length+1];
-    string_util::AnsiToUnicode((const char*)cur_buff, -1, uni_str, length);
-    uni_str[length] = TXT('\0');
-    message.Set(uni_str);
-    delete [] uni_str;
-#else
-    message.Set(cur_buff);
-#endif
+    const AnsiStr* cur_buff = compile_errors->GetBufferPointer();
+    String message(cur_buff);
     DG_LOG_LINE(TXT("error: shadercompile.compileshader.failed: %s"), message.Get());
     PopupMessage(TXT("Shader Compile Error"), TXT("shadercompiler.compileshader.failed: file_name:%s content:<<<%s>>>"), include_base_dir, message.Get());
     Check(0);
